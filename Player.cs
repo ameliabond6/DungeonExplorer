@@ -4,22 +4,40 @@ namespace DungeonExplorer
 {
     public class Player
     {
-        public string Name { get; private set; }
-        public int Health { get; private set; }
-        private List<string> inventory = new List<string>();
+        private string name;
+        private int health;
+        private string inventoryItem;
 
-        public Player(string name, int health) 
+        public Player(string name)
         {
-            Name = name;
-            Health = health;
+            this.name = name;
+            this.health = 100;
+            this.inventoryItem = "None";
         }
-        public void PickUpItem(string item)
-        {
 
-        }
-        public string InventoryContents()
+        public string GetName()
         {
-            return string.Join(", ", inventory);
+            return name;
+        }
+
+        public bool PickUpItem(string item)
+        {
+            if (inventoryItem == "None")
+            {
+                inventoryItem = item;
+                Console.WriteLine($"You picked up: {item}");// You picked up: {item} pop up message
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("You can only carry one item!"); // You can only carry one item pop up message
+                return false;
+            }
+        }
+
+        public void DisplayStatus()
+        {
+            Console.WriteLine($"Player: {name}\nHealth: {health}\nInventory: {inventoryItem}");
         }
     }
 }
